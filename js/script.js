@@ -1,12 +1,11 @@
-// User login and session management
-let currentUser = null;
-
-// Check if user is logged in
 document.addEventListener('DOMContentLoaded', () => {
     const loginSection = document.getElementById('login');
     const gameSection = document.getElementById('game');
+    const cardsContainer = document.getElementById('cards-container');
 
-    currentUser = localStorage.getItem('user');
+    let currentUser = localStorage.getItem('user');
+    const openedCards = JSON.parse(localStorage.getItem('openedCards') || '{}');
+
     if (currentUser) {
         loginSection.classList.add('hidden');
         gameSection.classList.remove('hidden');
@@ -25,48 +24,48 @@ document.addEventListener('DOMContentLoaded', () => {
             initializeGame();
         }
     });
-});
 
-// Initialize game
-function initializeGame() {
-    const startDate = new Date('2024-12-12');
-    const endDate = new Date('2025-01-25');
-    const today = new Date();
+    function initializeGame() {
+        const startDate = new Date('2024-12-12');
+        const endDate = new Date('2025-01-25');
+        const today = new Date();
+        cardsContainer.innerHTML = '';
 
-    const cardsContainer = document.getElementById('cards-container');
-    cardsContainer.innerHTML = '';
+        for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+            const day = new Date(d);
+            const dayKey = day.toISOString().split('T')[0];
 
-    const openedCards = JSON.parse(localStorage.getItem('openedCards') || '{}');
+            const card = document.createElement('div');
+            card.classList.add('col-auto', 'card');
 
-    for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-        const day = new Date(d);
-        const dayKey = day.toISOString().split('T')[0];
-        const card = document.createElement('div');
-        card.classList.add('card');
+            const cardInner = document.createElement('div');
+            cardInner.classList.add('card-inner');
 
-        // Check if card is unlocked or already opened
-        if (day <= today) {
-            if (openedCards[dayKey]) {
-                card.textContent = `Carta de ${dayKey} (Aberta)`;
-                card.classList.add('opened');
+            const cardFront = document.createElement('div');
+            cardFront.classList.add('card-front');
+            cardFront.textContent = dayKey;
+
+            const cardBack = document.createElement('div');
+            cardBack.classList.add('card-back');
+
+            cardInner.appendChild(cardFront);
+            cardInner.appendChild(cardBack);
+            card.appendChild(cardInner);
+
+            if (day <= today) {
+                cardInner.addEventListener('click', () => {
+                    if (!openedCards[dayKey]) {
+                        openedCards[dayKey] = true;
+                        localStorage.setItem('openedCards', JSON.stringify(openedCards));
+                        cardInner.classList.add('card-flipped');
+                        alert(`Você abriu a carta do dia ${dayKey}!`);
+                    }
+                });
             } else {
-                card.textContent = `Carta de ${dayKey}`;
-                card.addEventListener('click', () => openCard(dayKey));
+                card.classList.add('locked');
             }
-        } else {
-            card.textContent = `Carta de ${dayKey}`;
-            card.classList.add('locked');
+
+            cardsContainer.appendChild(card);
         }
-
-        cardsContainer.appendChild(card);
     }
-}
-
-// Open card logic
-function openCard(dayKey) {
-    const openedCards = JSON.parse(localStorage.getItem('openedCards') || '{}');
-    openedCards[dayKey] = true;
-    localStorage.setItem('openedCards', JSON.stringify(openedCards));
-    alert(`Você abriu a carta do dia ${dayKey}`);
-    initializeGame();
-}
+});

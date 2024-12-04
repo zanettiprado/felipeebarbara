@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -12,21 +11,49 @@ body {
 
 #cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     padding: 20px;
 }
 
 .card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    border: 2px solid #ddd;
-    cursor: pointer;
-    text-align: center;
+    width: 150px;
+    height: 200px;
+    perspective: 1000px; /* Necessário para o efeito de flip */
 }
 
-.card.locked {
-    background: #ccc;
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card.locked .card-inner {
     cursor: not-allowed;
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
+
+.card-front {
+    background: #fff;
+}
+
+.card-back {
+    background: url('./card_back.jpg') no-repeat center center;
+    background-size: cover;
+    transform: rotateY(180deg);
+}
+
+.card-flipped .card-inner {
+    transform: rotateY(180deg);
 }
