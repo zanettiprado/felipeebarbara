@@ -1,7 +1,7 @@
 /* Estilo geral */
 body {
     font-family: Arial, sans-serif;
-    background-color: bisque;
+    background-color: rgb(237, 227, 243);
 }
 
 h1 {
@@ -12,6 +12,8 @@ h1 {
 p {
     font-size: 1rem;
     color: #555;
+    text-align: center;
+    line-height: 1.5;
 }
 
 /* Contêiner da carta */
@@ -42,7 +44,7 @@ p {
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1rem; /* Ajusta o tamanho da fonte para textos longos */
+    font-size: 0.8rem; /* Reduzido de 1rem para 0.8rem */
     font-weight: bold;
     z-index: 2; /* Mantém a frente acima */
     text-align: center;
@@ -56,7 +58,7 @@ p {
     align-items: center;
     justify-content: center;
     color: black;
-    font-size: 1rem; /* Tamanho base da fonte */
+    font-size: 0.8rem; /* Reduzido de 1rem para 0.8rem */
     font-weight: bold;
     text-align: center;
     padding: 10px;
@@ -77,4 +79,20 @@ p {
 .card-container.flipped .card-back {
     transform: rotateY(0); /* Mostra o verso */
     z-index: 2; /* Move para frente */
+}
+
+
+#back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#back-button:hover {
+    background-color: #0056b3;
 }
