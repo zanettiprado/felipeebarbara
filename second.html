@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-light">
     <div class="container mt-5">
         <h1 id="feeling-header" class="text-center"></h1>
@@ -14,131 +16,137 @@
         <div id="cards-container" class="row mt-5 g-4"></div>
     </div>
 
-<script>
-    // Pega o valor do sentimento passado na URL
-    const params = new URLSearchParams(window.location.search);
-    const feeling = params.get("feeling") || "maravilhosa";
+    <script>
+        // Pega o valor do sentimento passado na URL
+        const params = new URLSearchParams(window.location.search);
+        const feeling = params.get("feeling") || "maravilhosa";
 
-    // Frases aleatórias
-    const phrases = [
-        "você está linda hoje!",
-        "você é uma pessoa que eu amo muito!",
-        "você tem um coração maravilhoso!",
-        "você é linda porque se importa com as pessoas!",
-        "você faz o meu dia mais feliz!",
-        "você é uma pessoa cheia de luz!",
-        "você é única e especial!",
-        "você é mais forte do que imagina!",
-        "você é inspiração para todos ao seu redor!",
-        "você merece tudo de bom que acontece!",
-        "você é capaz de realizar todos os seus sonhos!",
-        "você transforma o mundo à sua volta!",
-        "você é a razão de tantos sorrisos!"
-    ];
+        // Frases aleatórias
+        const phrases = [
+            "você está linda hoje!",
+            "você é uma pessoa que eu amo muito!",
+            "você tem um coração maravilhoso!",
+            "você é linda porque se importa com as pessoas!",
+            "você faz o meu dia mais feliz!",
+            "você é uma pessoa cheia de luz!",
+            "você é única e especial!",
+            "você é mais forte do que imagina!",
+            "você é inspiração para todos ao seu redor!",
+            "você merece tudo de bom que acontece!",
+            "você é capaz de realizar todos os seus sonhos!",
+            "você transforma o mundo à sua volta!",
+            "você é a razão de tantos sorrisos!"
+        ];
 
-    // Seleciona uma frase aleatória
-    const randomPhrase = phrases[new Date().getDate() % phrases.length];
+        // Seleciona uma frase aleatória
+        const randomPhrase = phrases[new Date().getDate() % phrases.length];
 
-    // Atualiza o conteúdo da página
-    document.getElementById("feeling-header").textContent = `Bárbara, hoje você está ${feeling}.`;
-    document.getElementById("random-phrase").textContent = randomPhrase;
+        // Atualiza o conteúdo da página
+        document.getElementById("feeling-header").textContent = `Bárbara, hoje você está ${feeling}.`;
+        document.getElementById("random-phrase").textContent = randomPhrase;
 
-    // Função para formatar datas
-    function formatDate(date) {
-        return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+        // Função para formatar datas
+        function formatDate(date) {
+            return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
 
-    }
-    
-const cardContents = [
-    "",
-    "A gente se conheceu por acaso, assim num dia normal, mas quando nos encontramos... QUEM ME COLOCOU PRA BEBERRRRRR!!!", // Dia 01/12/2024
-    "ESTOU TENDO TAQUICARDIA!!! Taquicardi tive eu quando pela primeira vez a gente se beijou, meu amigo logo recebeu a mensagem 'eh Ela'", // Dia 02/12/2024
-    "Frase para 03/12/2024", // Continue adicionando frases para os próximos dias...
-    "Frase para 04/12/2024", // ...
-    "Frase para 05/12/2024", // ...
-    // Continue expandindo a lista com as frases específicas
-];
-
-    // Função para comparar datas (ignora horas)
-    function isDateTodayOrPast(dateString) {
-        const today = new Date();
-        const cardDate = new Date(dateString);
-        return cardDate <= today; // Retorna true se a data for hoje ou no passado
-    }
-
-     // Configura datas
-    const cardsContainer = document.getElementById("cards-container");
-    const startDate = new Date("2024-12-01");
-    const endDate = new Date("2025-01-26");
-    const totalDays = calculateDaysBetween(startDate, endDate) + 1; // Inclui a data final
-    let currentDate = new Date(startDate); // Começa no dia inicial
-    
-
-    // Calcula o número de dias no intervalo
-    function calculateDaysBetween(startDate, endDate) {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const diffTime = Math.abs(end - start);
-        return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Converte para dias
-    }
-    // Gera cartas baseadas no número total de dias
-    for (let i = 1; i <= totalDays; i++) {
-        // Contêiner da carta
-        const cardContainer = document.createElement("div");
-        cardContainer.classList.add("card-container");
-
-        // Frente da carta (exibe a data)
-        const cardFront = document.createElement("div");
-        cardFront.classList.add("card", "card-front");
-        const cardDate = formatDate(currentDate); // Formata a data da carta
-        cardFront.textContent = cardDate; // Define a data como texto na frente
-
-        // Verso da carta (conteúdo específico)
-        const cardBack = document.createElement("div");
-        cardBack.classList.add("card", "card-back");
-        cardBack.textContent = cardContents[i] || "Sem conteúdo definido"; // Conteúdo específico ou mensagem padrão
-
-        // Adiciona as cartas ao contêiner
-        cardContainer.appendChild(cardFront);
-        cardContainer.appendChild(cardBack);
-
-        // Verifica se a data é válida para abrir
-        if (isDateTodayOrPast(currentDate.toISOString())) {
-            // Carta desbloqueada - pode girar
-                cardContainer.addEventListener("click", () => {
-                cardContainer.classList.toggle("flipped");
-            });
-        } else {
-            // Carta bloqueada - visualmente e funcionalmente
-            cardFront.style.opacity = "0.5"; // Reduz a opacidade para indicar bloqueio
-            cardContainer.style.cursor = "not-allowed"; // Cursor de bloqueio
         }
 
-        // Adiciona o contêiner ao grid
-        const col = document.createElement("div");
-        col.classList.add("col-12", "col-md-6", "col-lg-2", "d-flex", "justify-content-center");
-        col.appendChild(cardContainer);
-        cardsContainer.appendChild(col);
+        const cardContents = [
+            "",
+            "A gente se conheceu por acaso, num aplicativo kkk, achei que nao iamos nos ver, mas quando nos encontramos... QUEM ME COLOCOU PRA BEBEEEER!!!", // Dia 01/12/2024
+            "ESTOU TENDO TAQUICARDIA!!! Taquicardia tive eu quando pela primeira vez a gente se beijou, meu amigo logo recebeu a mensagem 'eh Ela'", // Dia 02/12/2024
+            "", // Continue adicionando frases para os próximos dias...
+            "", // ...
+            "", // ...
+            // Continue expandindo a lista com as frases específicas
+        ];
 
-        // Incrementa a data
-        currentDate.setDate(currentDate.getDate() + 1);
+        // Função para comparar datas (ignora horas)
+        function isDateTodayOrPast(dateString) {
+            const today = new Date();
+            const cardDate = new Date(dateString);
+            return cardDate <= today; // Retorna true se a data for hoje ou no passado
+        }
 
-        function adjustTextSize(cardBack) {
-    const parent = cardBack.parentElement;
-    const parentHeight = parent.offsetHeight;
-    const parentWidth = parent.offsetWidth;
+        // Configura datas
+        const cardsContainer = document.getElementById("cards-container");
+        const startDate = new Date("2024-12-04");
+        const endDate = new Date("2025-01-26");
+        const totalDays = calculateDaysBetween(startDate, endDate) + 1; // Inclui a data final
+        let currentDate = new Date(startDate); // Começa no dia inicial
 
-    // Ajusta a fonte para o tamanho máximo permitido
-    let fontSize = parseInt(window.getComputedStyle(cardBack).fontSize);
 
-    // Reduz o tamanho da fonte enquanto o texto não couber
-    while ((cardBack.scrollHeight > parentHeight || cardBack.scrollWidth > parentWidth) && fontSize > 10) {
-        fontSize--;
-        cardBack.style.fontSize = `${fontSize}px`;
-    }
-}
-    }
-</script>
+        // Calcula o número de dias no intervalo
+        function calculateDaysBetween(startDate, endDate) {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const diffTime = Math.abs(end - start);
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Converte para dias
+        }
+        // Gera cartas baseadas no número total de dias
+        for (let i = 1; i <= totalDays; i++) {
+            // Contêiner da carta
+            const cardContainer = document.createElement("div");
+            cardContainer.classList.add("card-container");
+
+            // Frente da carta (exibe a data)
+            const cardFront = document.createElement("div");
+            cardFront.classList.add("card", "card-front");
+            const cardDate = formatDate(currentDate); // Formata a data da carta
+            cardFront.textContent = cardDate; // Define a data como texto na frente
+
+            // Verso da carta (conteúdo específico)
+            const cardBack = document.createElement("div");
+            cardBack.classList.add("card", "card-back");
+            cardBack.textContent = cardContents[i] || ""; // Conteúdo específico ou mensagem padrão
+
+            // Adiciona as cartas ao contêiner
+            cardContainer.appendChild(cardFront);
+            cardContainer.appendChild(cardBack);
+
+            // Verifica se a data é válida para abrir
+            if (isDateTodayOrPast(currentDate.toISOString())) {
+                // Carta desbloqueada - pode girar
+                cardContainer.addEventListener("click", () => {
+                    cardContainer.classList.toggle("flipped");
+                });
+            } else {
+                // Carta bloqueada - visualmente e funcionalmente
+                cardFront.style.opacity = "0.5"; // Reduz a opacidade para indicar bloqueio
+                cardContainer.style.cursor = "not-allowed"; // Cursor de bloqueio
+            }
+
+            // Adiciona o contêiner ao grid
+            const col = document.createElement("div");
+            col.classList.add("col-12", "col-md-6", "col-lg-2", "d-flex", "justify-content-center");
+            col.appendChild(cardContainer);
+            cardsContainer.appendChild(col);
+
+            // Incrementa a data
+            currentDate.setDate(currentDate.getDate() + 1);
+
+            function adjustTextSize(cardBack) {
+                const parent = cardBack.parentElement;
+                const parentHeight = parent.offsetHeight;
+                const parentWidth = parent.offsetWidth;
+
+
+                // Ajusta o texto para todas as cartas
+                document.querySelectorAll('.card-back').forEach((cardBack) => {
+                    adjustTextSize(cardBack);
+                });
+
+                // Adiciona o evento de clique para girar as cartas
+                document.querySelectorAll('.card-container').forEach((cardContainer) => {
+                    cardContainer.addEventListener('click', () => {
+                        cardContainer.querySelector('.card').classList.toggle('flipped');
+                    });
+                });
+            }
+        }
+
+    </script>
 
 </body>
+
 </html>
