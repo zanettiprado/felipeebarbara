@@ -8,7 +8,10 @@ h1 {
     font-size: 2rem;
     color: #333;
 }
-
+span {
+    font-size: large;
+    font-weight: 900;
+}
 p {
     font-size: 1rem;
     color: #555;
@@ -95,4 +98,11 @@ p {
 
 #back-button:hover {
     background-color: #0056b3;
+}
+
+
+#countdown-message {
+    font-weight: bold;
+    font-size: 1.5rem; /* Ajusta o tamanho da fonte */
+    color: #337eff; /* Adiciona uma cor, opcional */
 }

@@ -23,9 +23,17 @@
         nos guiar até o dia que eu chegar. Daí em diante, será nossa vez."
     </p>
 
+    <div class="mt-5 bg-warning text-dark p-4 rounded">
+        <h1 class="text-center">Droga, tá bugando!</h1>
+        <p class="text-center">
+            Tá faltando cartinhas e a mensagem do dia de hoje já mudou de novo!!
+            Isso aqui tem tudo pra ficar mais interessante com o passar do tempo hein? Pena que tá
+            <span>BUGANDO</span>!!!!
+        </p>
+    </div>
+
     <!-- Frase diária e container de cartões -->
-    <h1 id="feeling-header" class="text-center"></h1>
-    <p id="random-phrase" class="text-center mt-3"></p>
+
     <div id="cards-container" class="row mt-5 g-4"></div>
 </div>
 
@@ -34,31 +42,10 @@
     const params = new URLSearchParams(window.location.search);
     const feeling = params.get("feeling") || "maravilhosa";
 
-    // Frases aleatórias
-    const phrases = [
-        "Você está linda hoje!",
-        "Você é uma pessoa que eu amo muito!",
-        "Você tem um coração maravilhoso!",
-        "Você é linda porque se importa com as pessoas!",
-        "Você tem muita luz. Basta ver como as pessoas ao seu redor te amam!",
-        "Sua beleza não é somente física!",
-        "Você é única e especial!",
-        "Você é mais forte do que imagina!",
-        "Você é uma inspiração para todos ao seu redor!",
-        "Você merece tudo de bom que acontece na sua vida!",
-        "Você é capaz de realizar todos os seus sonhos!",
-        "Você transforma o mundo à sua volta. Mantenha-se firme!",
-        "Muita gente acredita em você. Eu sou uma delas. Vai ficar tudo bem!"
-    ];
+
     document.getElementById('back-button').addEventListener('click', () => {
         window.location.href = 'index.html';
     });
-    // Seleciona uma frase aleatória
-    const randomPhrase = phrases[new Date().getDate() % phrases.length];
-
-    // Atualiza o conteúdo da página
-    document.getElementById("feeling-header").textContent = `Bárbara, hoje você está ${feeling}.`;
-    document.getElementById("random-phrase").textContent = randomPhrase;
 
     // Função para formatar datas
     function formatDate(date) {
@@ -68,9 +55,11 @@
 
     const cardContents = [
         "", // Placeholder para o índice 0 (se necessário, pode ser removido)
-        "A gente se conheceu por acaso, num aplicativo kkk, achei que nunca íamos nos ver, mas quando nos encontramos... QUEM ME COLOCOU PRA BEBEEEER!!!", // Dia 01/12/2024
-        "ESTOU TENDO TAQUICARDIA!!! Taquicardia tive eu quando pela primeira vez a gente se beijou, meu amigo logo recebeu a mensagem 'é Ela'", // Dia 02/12/2024
-        "ODEIO estar longe de você, todos os dias é uma luta imensa não poder continuar nossa história, e vamos precisar de muitos finais de semana juntos." // Dia 03/12/2024
+        "A gente se conheceu por acaso, num aplicativo kkk, achei que nunca íamos nos ver, mas quando nos encontramos... QUEM ME COLOCOU PRA BEBEEEER!!!",
+        "ACHO QUE O SITE TA BUGADO, ta faltando carta e as datas estão erradas. Talvez eu esteja bugado... ou sei la as vezes eu troquei a data da passagem...",
+        "ESTOU TENDO TAQUICARDIA!!! Taquicardia tive eu quando pela primeira vez a gente se beijou, meu amigo logo recebeu a mensagem 'é Ela'",
+        "",
+        "ODEIO estar longe de você, todos os dias é uma luta imensa não poder continuar nossa história, e vamos precisar de muitos finais de semana juntos.",
     ];
 
     // Função para comparar datas (ignora horas)
@@ -83,7 +72,7 @@
     // Configura datas
     const cardsContainer = document.getElementById("cards-container");
     const startDate = new Date("2024-12-04");
-    const endDate = new Date("2025-01-26");
+    const endDate = new Date("2024-12-31");
     const totalDays = calculateDaysBetween(startDate, endDate) + 1; // Inclui a data final
     let currentDate = new Date(startDate); // Começa no dia inicial
 

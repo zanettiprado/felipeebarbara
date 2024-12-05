@@ -13,7 +13,7 @@
     <div class="container text-center">
         <h1 class="mb-4">Olá, <span id="username">Bárbara</span>! Seja bem-vinda.</h1>
         <p>Hoje é <span id="current-date"></span>.</p>
-        <p id="countdown-message" class="mb-4"></p> <!-- Contagem regressiva será exibida aqui -->
+        <p id="countdown-message" class="mb-4 fw-bold display-4"></p> <!-- Contagem regressiva será exibida aqui -->
         <p class="mb-4">Como você está se sentindo hoje?</p>
         <form id="feeling-form" action="second.html">
             <input type="text" id="feeling" class="form-control mb-3" placeholder="Escreva aqui..." required>
@@ -21,25 +21,24 @@
         </form>
     </div>
     <script>
-// Atualizar a data de hoje
-document.getElementById("current-date").textContent = new Date().toLocaleDateString('pt-BR', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-});
+        // Atualizar a data de hoje
+        document.getElementById("current-date").textContent = new Date().toLocaleDateString('pt-BR', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
 
-// Data final (26 de janeiro de 2025)
-const targetDate = new Date("2025-01-26");
+        // Data final (31 de dezembro de 2024)
+        const targetDate = new Date("2024-12-31");
 
-// Calcula a diferença de dias entre hoje e a data final
-const today = new Date();
-const diffTime = targetDate - today;
-const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        // Calcula a diferença de dias entre hoje e a data final
+        const today = new Date();
+        const diffTime = targetDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-// Exibe a mensagem de contagem regressiva
-document.getElementById("countdown-message").textContent = `Faltam apenas ${diffDays} dias para a gente ficar junto de novo!`;
-
+        // Exibe a mensagem de contagem regressiva
+        document.getElementById("countdown-message").textContent = `Faltam apenas ${diffDays} dias para a gente ficar junto de novo!`;
     </script>
 </body>
 
