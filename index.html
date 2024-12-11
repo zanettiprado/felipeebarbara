@@ -14,11 +14,7 @@
         <h1 class="mb-4">Olá, <span id="username">Bárbara</span>! Seja bem-vinda.</h1>
         <p>Hoje é <span id="current-date"></span>.</p>
         <p id="countdown-message" class="mb-4 fw-bold display-4"></p> <!-- Contagem regressiva será exibida aqui -->
-        <p class="mb-4">Como você está se sentindo hoje?</p>
-        <form id="feeling-form" action="second.html">
-            <input type="text" id="feeling" class="form-control mb-3" placeholder="Escreva aqui..." required>
-            <button type="submit" class="btn btn-primary w-100">Enviar</button>
-        </form>
+        <button onclick="location.href='second.html'" class="btn btn-primary w-100">Ir para as cartas</button>
     </div>
     <script>
         // Atualizar a data de hoje
@@ -38,7 +34,7 @@
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
         // Exibe a mensagem de contagem regressiva
-        document.getElementById("countdown-message").textContent = `Faltam apenas ${diffDays} dias para a gente ficar junto de novo!`;
+        document.getElementById("countdown-message").textContent = `Faltam apenas ${diffDays} para a gente dividir o mesmo fuso horario!`;
     </script>
 </body>
 
