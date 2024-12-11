@@ -1,0 +1,98 @@
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(237, 227, 243);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+p {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Contêiner da carta */
+.card-container {
+    width: 150px;
+    height: 200px;
+    perspective: 1000px; /* Cria o efeito 3D */
+    position: relative;
+}
+
+.card {
+    width: 100%; /* Largura total do contêiner */
+    height: 100%; /* Altura total do contêiner */
+    position: absolute;
+    backface-visibility: hidden; /* Esconde o lado inverso */
+    border-radius: 10px;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
+    transform-style: preserve-3d;
+}
+
+/* Frente da carta */
+.card-front {
+    background-image: url('last.png'); /* Imagem da frente */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    background-position: center; /* Centraliza a imagem */
+    background-size: cover; /* Faz a imagem cobrir toda a carta */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem; /* Reduzido de 1rem para 0.8rem */
+    font-weight: bold;
+    z-index: 2; /* Mantém a frente acima */
+    text-align: center;
+    padding: 10px; /* Adiciona espaçamento interno */
+}
+
+/* Verso da carta */
+.card-back {
+    background-color: rgb(238, 204, 204); /* Cor do verso */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 0.8rem; /* Reduzido de 1rem para 0.8rem */
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    word-wrap: break-word; /* Permite quebra de palavras longas */
+    overflow: hidden; /* Impede que o texto ultrapasse as bordas */
+    max-width: 100%;
+    max-height: 100%;
+    line-height: 1.2; /* Ajusta o espaçamento entre linhas */
+    transform: rotateY(180deg); /* Esconde o verso inicialmente */
+}
+
+/* Quando a carta gira */
+.card-container.flipped .card-front {
+    transform: rotateY(180deg); /* Gira a frente */
+    z-index: 1; /* Move para trás */
+}
+
+.card-container.flipped .card-back {
+    transform: rotateY(0); /* Mostra o verso */
+    z-index: 2; /* Move para frente */
+}
+
+
+#back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#back-button:hover {
+    background-color: #0056b3;
+}
