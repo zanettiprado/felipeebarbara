@@ -11,7 +11,7 @@
 
 <body class="d-flex align-items-center justify-content-center vh-100">
     <div class="container text-center">
-        <h1 class="mb-4">Olá, <span id="username">Bárbara</span>! Seja bem-vinda.</h1>
+        <h1 class="mb-4">Olá, <span id="username">Bárbara</span></h1>
         <p>Hoje é <span id="current-date"></span>.</p>
         <p id="countdown-message" class="mb-4 fw-bold display-4"></p> <!-- Contagem regressiva será exibida aqui -->
         <button onclick="location.href='second.html'" class="btn btn-primary w-100">Ir para as cartas</button>
@@ -34,7 +34,7 @@
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
         // Exibe a mensagem de contagem regressiva
-        document.getElementById("countdown-message").textContent = `Faltam apenas ${diffDays} para a gente dividir o mesmo fuso horario!`;
+        document.getElementById("countdown-message").textContent = ` ${diffDays} dias`;
     </script>
 </body>
 
